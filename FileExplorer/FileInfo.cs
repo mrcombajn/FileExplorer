@@ -1,6 +1,6 @@
 ﻿namespace FileExplorer
 {
-    public class FileInfo
+    public class FileInfo : FileSystemInfo
     {
     }
 }
