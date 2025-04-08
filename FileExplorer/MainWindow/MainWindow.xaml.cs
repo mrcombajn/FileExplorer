@@ -2,9 +2,11 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using FileExplorer.Components;
+using FileExplorer.Components.Directory;
+using FileExplorer.Components.FileInfo;
+using FileExplorer.Components.Helpers;
 
-namespace FileExplorer
+namespace FileExplorer.MainWindow
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -89,7 +91,7 @@ namespace FileExplorer
 
             Directories.Items.Clear();
             UpdateTreeView();
-        } 
+        }
         private void DeleteDirectory(object sender, RoutedEventArgs e)
         {
             var x = (MenuItem)e.Source;
