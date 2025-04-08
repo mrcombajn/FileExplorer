@@ -2,7 +2,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using FileExplorer.Components;
+using FileExplorer.Components.Directory;
+using FileExplorer.Components.FileInfo;
+using FileExplorer.Components.Helpers;
 
 namespace FileExplorer.MainWindow
 {

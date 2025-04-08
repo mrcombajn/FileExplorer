@@ -1,4 +1,6 @@
-﻿namespace FileExplorer
+﻿using FileExplorer.Components.FileSystem;
+
+namespace FileExplorer.Components.Directory
 {
     public class DirectoryInfoViewModel : FileSystemInfoViewModel
     {

@@ -2,7 +2,7 @@
 using Microsoft.Win32.SafeHandles;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace FileExplorer.Components
+namespace FileExplorer.Components.Helpers
 {
     public class FileHandler
     {
