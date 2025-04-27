@@ -1,4 +1,8 @@
-﻿using FileExplorer.Components.FileSystem;
+﻿#region Using Statements
+
+using FileExplorer.Components.FileSystem;
+
+#endregion
 
 namespace FileExplorer.Components.FileInfo
 {
@@ -6,24 +10,6 @@ namespace FileExplorer.Components.FileInfo
     {
         #region Fields and Constants
 
-        private DateTime _lastWriteTime;
-
-        #endregion
-
-        #region Properties
-
-        public DateTime LastWriteTime
-        {
-            get { return _lastWriteTime; }
-            set
-            {
-                if (_lastWriteTime != value)
-                {
-                    _lastWriteTime = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
 
         #endregion
     }
