@@ -1,7 +1,7 @@
-﻿using System.Windows;
-using FileExplorer.Components;
+﻿
+using System.Windows;
 
-namespace FileExplorer.MainWindow
+namespace FileExplorer
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -13,7 +13,7 @@ namespace FileExplorer.MainWindow
         {
             var dlg = new FolderBrowserDialog() { Description = "Select directory to open" };
 
-            if(dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 var path = dlg.SelectedPath;
                 var filesExplorer = new Components.FileExplorer();
