@@ -12,7 +12,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using FileExplorer.Components.Helpers;
 
 namespace FileExplorer
 {
@@ -23,7 +22,7 @@ namespace FileExplorer
     {
         private string sourcePath;
 
-        public CreateDialog(string sourcePath)
+/*        public CreateDialog(string sourcePath)
         {
             InitializeComponent();
             this.sourcePath = sourcePath;
@@ -47,8 +46,8 @@ namespace FileExplorer
             {
                 var textBox = CreateEntityName;
 
-                FileHandler.CreateDirectory(sourcePath, textBox.Text);
-                FileHandler.SetDirectoryAttributes(sourcePath, textBox.Text, GetAttributes());
+                FilesExplorer.CreateDirectory(sourcePath, textBox.Text);
+                FilesExplorer.SetDirectoryAttributes(sourcePath, textBox.Text, GetAttributes());
             }
             catch (Exception e)
             {
@@ -62,8 +61,8 @@ namespace FileExplorer
             {
                 var textBox = CreateEntityName;
 
-                FileHandler.CreateFile(sourcePath, textBox.Text);
-                FileHandler.SetFileAttributes(sourcePath, textBox.Text, GetAttributes());
+                FilesExplorer.CreateFile(sourcePath, textBox.Text);
+                FilesExplorer.SetFileAttributes(sourcePath, textBox.Text, GetAttributes());
             }
             catch(Exception e)
             {
@@ -85,6 +84,6 @@ namespace FileExplorer
                 attributes.Add(FileAttributes.System);
 
             return attributes;
-        }
+        }*/
     }
 }

@@ -19,13 +19,13 @@
         <DockPanel Grid.Row="0" Grid.ColumnSpan="2">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_Open" Name="OpenFile" Click="OpenFile_Click"/>
+                    <MenuItem Header="_Open" Name="OpenFile" Click="OpenDirMenuItem_Click"/>
                     <Separator/>
                     <MenuItem Header="_Exit" Name="ExitProgram" Click="ExitProgram_Click"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <TreeView Name="Directories" Grid.Row="1" Grid.Column="0"/>
+        <TreeView Name="DiskTreeView" ItemsSource="{Binding Root.Items}" Grid.Row="1" Grid.Column="0"/>
         <StackPanel Grid.Row="2" Grid.RowSpan="2" Grid.Column="0">
             <StatusBar Name="FileProperties"/>
         </StackPanel>

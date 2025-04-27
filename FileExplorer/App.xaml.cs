@@ -1,8 +1,4 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
-
-namespace FileExplorer
+﻿namespace FileExplorer
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -10,5 +6,4 @@ namespace FileExplorer
     public partial class App : System.Windows.Application
     {
     }
-
 }

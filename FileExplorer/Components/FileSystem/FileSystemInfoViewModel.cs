@@ -10,17 +10,17 @@ namespace FileExplorer.Components.FileSystem
     {
         #region Fields and Constants
 
-        private DateTime _lastWriteTime;
-        private DateTime _lastAccessTime;
-        private DateTime _creationTime;
+        private DateTime? _lastWriteTime;
+        private DateTime? _lastAccessTime;
+        private DateTime? _creationTime;
 
-        private FileSystemInfo _fileSystemInfo;
+        private FileSystemInfo? _fileSystemInfo;
 
         #endregion
 
         #region Properties
 
-        public FileSystemInfo Model
+        public FileSystemInfo? Model
         {
             get { return _fileSystemInfo; }
             set 
@@ -29,16 +29,16 @@ namespace FileExplorer.Components.FileSystem
                 {
                     _fileSystemInfo = value;
 
-                    LastWriteTime = value.LastWriteTime;
-                    LastAccessTime = value.LastAccessTime;
-                    CreationTime = value.CreationTime;
+                    LastWriteTime = value?.LastWriteTime;
+                    LastAccessTime = value?.LastAccessTime;
+                    CreationTime = value?.CreationTime;
 
                     NotifyPropertyChanged();
                 }
             }
         }
 
-        public DateTime LastWriteTime
+        public DateTime? LastWriteTime
         {
             get { return _lastWriteTime; }
             set
@@ -51,7 +51,7 @@ namespace FileExplorer.Components.FileSystem
             }
         }
 
-        public DateTime LastAccessTime
+        public DateTime? LastAccessTime
         {
             get { return _lastAccessTime; }
             set
@@ -64,7 +64,7 @@ namespace FileExplorer.Components.FileSystem
             }
         }
 
-        public DateTime CreationTime
+        public DateTime? CreationTime
         {
             get { return _creationTime; }
             set
