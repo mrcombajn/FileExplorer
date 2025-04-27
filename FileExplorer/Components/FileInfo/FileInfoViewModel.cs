@@ -8,9 +8,5 @@ namespace FileExplorer.Components.FileInfo
 {
     public class FileInfoViewModel : FileSystemInfoViewModel
     {
-        #region Fields and Constants
-
-
-        #endregion
     }
 }
