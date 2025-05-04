@@ -4,7 +4,7 @@ using FileExplorer.Components.FileSystem;
 
 #endregion
 
-namespace FileExplorer.Components.FileInfo
+namespace FileExplorer
 {
     public class FileInfoViewModel : FileSystemInfoViewModel
     {

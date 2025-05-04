@@ -6,7 +6,7 @@ using FileExplorer.Components.FileSystem;
 
 #endregion
 
-namespace FileExplorer.Components.DirectoryComponents
+namespace FileExplorer
 {
     public class DirectoryInfoViewModel : FileSystemInfoViewModel
     {
@@ -32,12 +32,14 @@ namespace FileExplorer.Components.DirectoryComponents
                     DirectoryInfoViewModel itemViewModel = new();
                     itemViewModel.Model = dirInfo;
                     Items.Add(itemViewModel);
+
+                    itemViewModel.Open(dirInfo.FullName);
                 }
 
                 foreach (var directoryName in Directory.GetFiles(path))
                 {
                     var fileInfo = new DirectoryInfo(directoryName);
-                    DirectoryInfoViewModel itemViewModel = new();
+                    FileInfoViewModel itemViewModel = new();
                     itemViewModel.Model = fileInfo;
                     Items.Add(itemViewModel);
                 }

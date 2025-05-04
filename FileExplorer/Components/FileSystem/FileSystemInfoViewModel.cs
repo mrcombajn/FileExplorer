@@ -14,6 +14,7 @@ namespace FileExplorer.Components.FileSystem
         private DateTime? _lastAccessTime;
         private DateTime? _creationTime;
 
+        private string? _caption;
         private FileSystemInfo? _fileSystemInfo;
 
         #endregion
@@ -32,6 +33,7 @@ namespace FileExplorer.Components.FileSystem
                     LastWriteTime = value?.LastWriteTime;
                     LastAccessTime = value?.LastAccessTime;
                     CreationTime = value?.CreationTime;
+                    Caption = value?.Name;
 
                     NotifyPropertyChanged();
                 }
@@ -72,6 +74,19 @@ namespace FileExplorer.Components.FileSystem
                 if (_creationTime != value)
                 {
                     _creationTime = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public string? Caption
+        {
+            get { return _caption; }
+            set
+            {
+                if (_caption != value)
+                {
+                    _caption = value;
                     NotifyPropertyChanged();
                 }
             }

@@ -6,6 +6,14 @@
         xmlns:local="clr-namespace:FileExplorer"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type local:FileInfoViewModel}">
+            <TextBlock Text="{Binding Caption}"/>
+        </DataTemplate>
+        <HierarchicalDataTemplate DataType="{x:Type local:DirectoryInfoViewModel}" ItemsSource="{Binding Items}">
+            <TextBlock Text="{Binding Caption}" FontWeight="Bold"/>
+        </HierarchicalDataTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -25,7 +33,9 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <TreeView Name="DiskTreeView" ItemsSource="{Binding Root.Items}" Grid.Row="1" Grid.Column="0"/>
+        <TreeView Name="DiskTreeView" ItemsSource="{Binding Root.Items}" Grid.Row="1" Grid.Column="0">
+
+        </TreeView>
         <StackPanel Grid.Row="2" Grid.RowSpan="2" Grid.Column="0">
             <StatusBar Name="FileProperties"/>
         </StackPanel>

@@ -9,4 +9,9 @@
     <UseWindowsForms>True</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Components\DirectoryComponents\" />
+    <Folder Include="Components\FileInfo\" />
+  </ItemGroup>
+
 </Project>

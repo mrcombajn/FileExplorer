@@ -1,10 +1,4 @@
-﻿#region Using Statements
-
-using FileExplorer.Components.DirectoryComponents;
-
-#endregion
-
-namespace FileExplorer.Components
+﻿namespace FileExplorer.Components
 {
     public class FileExplorer : ViewModelBase
     {
