@@ -8,10 +8,16 @@
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
         <DataTemplate DataType="{x:Type local:FileInfoViewModel}">
-            <TextBlock Text="{Binding Caption}"/>
+            <StackPanel Orientation="Horizontal">
+                <Image Width="16" Source="{Binding ImageSource}"/>
+                <TextBlock Text="{Binding Caption}" Margin="10,0,0,0"/>
+            </StackPanel>
         </DataTemplate>
         <HierarchicalDataTemplate DataType="{x:Type local:DirectoryInfoViewModel}" ItemsSource="{Binding Items}">
-            <TextBlock Text="{Binding Caption}" FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal">
+                <Image Width="16" Source="FolderClose.png"/>
+                <TextBlock Text="{Binding Caption}" Margin="10,0,0,0" FontWeight="Bold"/>
+            </StackPanel>
         </HierarchicalDataTemplate>
     </Window.Resources>
     <Grid>
