@@ -10,8 +10,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="CsFile.png" />
+    <None Remove="DefaultFile.png" />
+    <None Remove="FolderClose.png" />
+    <None Remove="PdfFile.png" />
+    <None Remove="TextFile.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Components\DirectoryComponents\" />
     <Folder Include="Components\FileInfo\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="CsFile.png" />
+    <Resource Include="DefaultFile.png" />
+    <Resource Include="FolderClose.png" />
+    <Resource Include="PdfFile.png" />
+    <Resource Include="TextFile.png" />
   </ItemGroup>
 
 </Project>

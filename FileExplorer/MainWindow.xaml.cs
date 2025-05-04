@@ -16,7 +16,7 @@ namespace FileExplorer
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 var path = dlg.SelectedPath;
-                var filesExplorer = new Components.FileExplorer();
+                var filesExplorer = new Components.FilesExplorer();
                 filesExplorer.OpenRoot(path);
                 DataContext = filesExplorer;
             }

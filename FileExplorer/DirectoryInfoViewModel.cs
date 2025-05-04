@@ -3,6 +3,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using FileExplorer.Components.FileSystem;
+using FileExplorer.Components;
 
 #endregion
 
@@ -41,6 +42,8 @@ namespace FileExplorer
                     var fileInfo = new DirectoryInfo(directoryName);
                     FileInfoViewModel itemViewModel = new();
                     itemViewModel.Model = fileInfo;
+                    itemViewModel.SetIcon();
+
                     Items.Add(itemViewModel);
                 }
             }
@@ -50,6 +53,44 @@ namespace FileExplorer
             }
             return result;
         }
+
+        #endregion
+
+        #region Private Methods
+/*
+        private FileSystemWatcher CreateFileSystemWatcher(string path)
+        {
+            FileSystemWatcher watcher = new(path);
+            watcher.Created += OnFileSystemChanged;
+            watcher.Renamed += OnFileSystemChanged;
+            watcher.Deleted += OnFileSystemChanged;
+            watcher.Changed += OnFileSystemChanged;
+            watcher.Error += Watcher_Error;
+            watcher.EnableRaisingEvents = true;
+
+            return watcher;
+        }
+
+        protected void OnFileSystemChanged(object sender, EventArgs e)
+        {
+            var fileSystemWatcher = (FileSystemWatcher)sender;
+
+            e.
+            
+            switch (fileSystemWatcher.)
+            {
+                WatcherChangeTypes.Created => FilesExplorer.Created();
+                WatcherChangeTypes.Renamed =>  FilesExplorer.Renamed();
+                WatcherChangeTypes.Deleted => FilesExplorer.Deleted();
+                WatcherChangeTypes.Changed =>  FilesExplorer.Changed();
+            }
+
+        }
+
+        protected void Watcher_Error(object sender, EventArgs e)
+        {
+
+        }*/
 
         #endregion
     }
