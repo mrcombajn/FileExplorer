@@ -12,8 +12,10 @@
   <ItemGroup>
     <None Remove="CsFile.png" />
     <None Remove="DefaultFile.png" />
+    <None Remove="EN.png" />
     <None Remove="FolderClose.png" />
     <None Remove="PdfFile.png" />
+    <None Remove="PL.png" />
     <None Remove="TextFile.png" />
   </ItemGroup>
 
@@ -22,11 +24,13 @@
     <Folder Include="Components\FileInfo\" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup>  
     <Resource Include="CsFile.png" />
     <Resource Include="DefaultFile.png" />
+    <Resource Include="EN.png" />
     <Resource Include="FolderClose.png" />
     <Resource Include="PdfFile.png" />
+    <Resource Include="PL.png" />
     <Resource Include="TextFile.png" />
   </ItemGroup>
 
