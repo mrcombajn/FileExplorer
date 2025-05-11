@@ -1,10 +1,8 @@
 ﻿#region Using Statements
 
-using FileExplorer.Components.FileSystem;
-
 #endregion
 
-namespace FileExplorer
+namespace FileExplorer.ViewModels
 {
     public class FileInfoViewModel : FileSystemInfoViewModel
     {

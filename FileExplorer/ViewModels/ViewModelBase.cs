@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 #endregion
 
-namespace FileExplorer.Components
+namespace FileExplorer.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {

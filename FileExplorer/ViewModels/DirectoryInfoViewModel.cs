@@ -2,12 +2,10 @@
 
 using System.Collections.ObjectModel;
 using System.IO;
-using FileExplorer.Components.FileSystem;
-using FileExplorer.Components;
 
 #endregion
 
-namespace FileExplorer
+namespace FileExplorer.ViewModels
 {
     public class DirectoryInfoViewModel : FileSystemInfoViewModel
     {
@@ -34,6 +32,7 @@ namespace FileExplorer
                     itemViewModel.Model = dirInfo;
                     Items.Add(itemViewModel);
 
+
                     itemViewModel.Open(dirInfo.FullName);
                 }
 
@@ -46,6 +45,8 @@ namespace FileExplorer
 
                     Items.Add(itemViewModel);
                 }
+
+                CreateFileSystemWatcher(path);
             }
             catch (Exception ex)
             {
@@ -57,41 +58,47 @@ namespace FileExplorer
         #endregion
 
         #region Private Methods
-/*
+
         private FileSystemWatcher CreateFileSystemWatcher(string path)
         {
             FileSystemWatcher watcher = new(path);
-            watcher.Created += OnFileSystemChanged;
-            watcher.Renamed += OnFileSystemChanged;
-            watcher.Deleted += OnFileSystemChanged;
-            watcher.Changed += OnFileSystemChanged;
+
+            watcher.IncludeSubdirectories = false;
+            watcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.DirectoryName | NotifyFilters.LastWrite;
+
+            watcher.Created += OnCreate;
+            watcher.Renamed += OnRename;
+            watcher.Deleted += OnDelete;
+            watcher.Changed += OnChanged;
             watcher.Error += Watcher_Error;
             watcher.EnableRaisingEvents = true;
 
             return watcher;
         }
 
-        protected void OnFileSystemChanged(object sender, EventArgs e)
+        private void OnCreate(object sender, FileSystemEventArgs e)
         {
-            var fileSystemWatcher = (FileSystemWatcher)sender;
-
-            e.
-            
-            switch (fileSystemWatcher.)
-            {
-                WatcherChangeTypes.Created => FilesExplorer.Created();
-                WatcherChangeTypes.Renamed =>  FilesExplorer.Renamed();
-                WatcherChangeTypes.Deleted => FilesExplorer.Deleted();
-                WatcherChangeTypes.Changed =>  FilesExplorer.Changed();
-            }
-
+            var papiez = new string("");
         }
 
-        protected void Watcher_Error(object sender, EventArgs e)
+        private void OnRename(object sender, FileSystemEventArgs e)
         {
+        }
 
-        }*/
+        private void OnDelete(object sender, FileSystemEventArgs e)
+        {
+        }
+        private void OnChanged(object sender, FileSystemEventArgs e)
+        {
+        }
+
+        private void Watcher_Error(object sender, ErrorEventArgs e)
+        {
+            MessageBox.Show($"Exception: {e.ToString()}");
+        }
 
         #endregion
+
+
     }
 }

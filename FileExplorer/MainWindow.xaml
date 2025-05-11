@@ -4,16 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileExplorer"
-        mc:Ignorable="d"
+        xmlns:converters="clr-namespace:FileExplorer.Converters"
+        xmlns:vm="clr-namespace:FileExplorer.ViewModels"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
-        <DataTemplate DataType="{x:Type local:FileInfoViewModel}">
+        <DataTemplate DataType="{x:Type vm:FileInfoViewModel}">
             <StackPanel Orientation="Horizontal">
                 <Image Width="16" Source="{Binding ImageSource}"/>
                 <TextBlock Text="{Binding Caption}" Margin="10,0,0,0"/>
             </StackPanel>
         </DataTemplate>
-        <HierarchicalDataTemplate DataType="{x:Type local:DirectoryInfoViewModel}" ItemsSource="{Binding Items}">
+        <HierarchicalDataTemplate DataType="{x:Type vm:DirectoryInfoViewModel}" ItemsSource="{Binding Items}">
             <StackPanel Orientation="Horizontal">
                 <Image Width="16" Source="FolderClose.png"/>
                 <TextBlock Text="{Binding Caption}" Margin="10,0,0,0" FontWeight="Bold"/>
@@ -29,7 +30,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        <local:LangBoolConverter x:Key="LangBoolConverter"/>
+        <converters:LangBoolConverter x:Key="LangBoolConverter"/>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -52,11 +53,11 @@
         </DockPanel>
         <ToolBarPanel Orientation="Horizontal" Grid.Column="1" Background="{x:Static SystemColors.ControlLightBrush}">
             <ToggleButton x:Name="PolishLanguageButton" Style="{StaticResource LangButtonStyle}" IsChecked="{Binding Lang, Converter={StaticResource LangBoolConverter}, ConverterParameter=pl}">
-                <Image Source="PL.png" Width="16"/>
+                <Image Source="/Images/PL.png" Width="16"/>
             </ToggleButton>
 
             <ToggleButton x:Name="EnglishLanguageButton" Style="{StaticResource LangButtonStyle}" IsChecked="{Binding Lang, Converter={StaticResource LangBoolConverter}, ConverterParameter=en}">
-                <Image Source="EN.png" Width="16"/>
+                <Image Source="/Images/EN.png" Width="16"/>
             </ToggleButton>
         </ToolBarPanel>
 

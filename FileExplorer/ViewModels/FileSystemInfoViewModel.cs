@@ -4,7 +4,7 @@ using System.IO;
 
 #endregion
 
-namespace FileExplorer.Components.FileSystem
+namespace FileExplorer.ViewModels
 {
     public class FileSystemInfoViewModel : ViewModelBase
     {
@@ -24,9 +24,9 @@ namespace FileExplorer.Components.FileSystem
         public FileSystemInfo? Model
         {
             get { return _fileSystemInfo; }
-            set 
-            { 
-                if(_fileSystemInfo != value)
+            set
+            {
+                if (_fileSystemInfo != value)
                 {
                     _fileSystemInfo = value;
 
