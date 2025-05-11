@@ -19,6 +19,17 @@
                 <TextBlock Text="{Binding Caption}" Margin="10,0,0,0" FontWeight="Bold"/>
             </StackPanel>
         </HierarchicalDataTemplate>
+        <Style x:Key="LangButtonStyle" TargetType="ToggleButton">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="Blue"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <local:LangBoolConverter x:Key="LangBoolConverter"/>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -32,13 +43,23 @@
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" Grid.ColumnSpan="2">
             <Menu DockPanel.Dock="Top">
-                <MenuItem Header="_File">
-                    <MenuItem Header="_Open" Name="OpenFile" Click="OpenDirMenuItem_Click"/>
+                <MenuItem Header="{Binding Source={StaticResource Strings}, Path=File}">
+                    <MenuItem Header="{Binding Source={StaticResource Strings}, Path=Open_Directory}" Name="OpenFile" Click="OpenDirMenuItem_Click"/>
                     <Separator/>
                     <MenuItem Header="_Exit" Name="ExitProgram" Click="ExitProgram_Click"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
+        <ToolBarPanel Orientation="Horizontal" Grid.Column="1" Background="{x:Static SystemColors.ControlLightBrush}">
+            <ToggleButton x:Name="PolishLanguageButton" Style="{StaticResource LangButtonStyle}" IsChecked="{Binding Lang, Converter={StaticResource LangBoolConverter}, ConverterParameter=pl}">
+                <Image Source="PL.png" Width="16"/>
+            </ToggleButton>
+
+            <ToggleButton x:Name="EnglishLanguageButton" Style="{StaticResource LangButtonStyle}" IsChecked="{Binding Lang, Converter={StaticResource LangBoolConverter}, ConverterParameter=en}">
+                <Image Source="EN.png" Width="16"/>
+            </ToggleButton>
+        </ToolBarPanel>
+
         <TreeView Name="DiskTreeView" ItemsSource="{Binding Root.Items}" Grid.Row="1" Grid.Column="0">
 
         </TreeView>

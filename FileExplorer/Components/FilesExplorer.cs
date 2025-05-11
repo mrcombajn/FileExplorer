@@ -1,4 +1,6 @@
 ﻿
+using System.Globalization;
+
 namespace FileExplorer.Components
 {
     public class FilesExplorer : ViewModelBase
@@ -6,6 +8,31 @@ namespace FileExplorer.Components
         #region Properties
 
         public DirectoryInfoViewModel? Root { get; set; }
+
+        public string Lang
+        {
+            get { return CultureInfo.CurrentUICulture.TwoLetterISOLanguageName; }
+            set
+            {
+                if (value != null)
+                {
+                    if (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName != value)
+                    {
+                        CultureInfo.CurrentUICulture = new CultureInfo(value);
+                        NotifyPropertyChanged();
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region Constructors and Deconstructors 
+
+        public FilesExplorer()
+        {
+            NotifyPropertyChanged(nameof(Lang));
+        }
 
         #endregion
 
