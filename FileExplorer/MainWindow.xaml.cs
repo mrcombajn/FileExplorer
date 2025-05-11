@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel;
+using System.Globalization;
 using System.Windows;
 using FileExplorer.Components;
 
@@ -16,6 +18,7 @@ namespace FileExplorer
             InitializeComponent();
             _filesExplorer = new();
             DataContext = _filesExplorer;
+            _filesExplorer.PropertyChanged += _filesExplorer_PropertyChanged;
         }
 
         private void OpenDirMenuItem_Click(object sender, RoutedEventArgs e)
@@ -31,6 +34,12 @@ namespace FileExplorer
         private void ExitProgram_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.Application.Exit();
+        }
+
+        private void _filesExplorer_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(_filesExplorer.Lang))
+                CultureResources.ChangeCulture(CultureInfo.CurrentUICulture);
         }
 
         /*        private void OpenFile_Click(object sender, RoutedEventArgs e)

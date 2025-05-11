@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:FileExplorer"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ObjectDataProvider x:Key="Strings" ObjectType="{x:Type local:CultureResources}" MethodName="GetStringsInstance"/>
     </Application.Resources>
 </Application>
