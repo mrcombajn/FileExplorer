@@ -10,28 +10,30 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="CsFile.png" />
-    <None Remove="DefaultFile.png" />
-    <None Remove="EN.png" />
-    <None Remove="FolderClose.png" />
-    <None Remove="PdfFile.png" />
-    <None Remove="PL.png" />
-    <None Remove="TextFile.png" />
+    <Compile Remove="Components\**" />
+    <EmbeddedResource Remove="Components\**" />
+    <None Remove="Components\**" />
+    <Page Remove="Components\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Components\DirectoryComponents\" />
-    <Folder Include="Components\FileInfo\" />
+    <None Remove="Images\CsFile.png" />
+    <None Remove="Images\DefaultFile.png" />
+    <None Remove="Images\EN.png" />
+    <None Remove="Images\FolderClose.png" />
+    <None Remove="Images\PdfFile.png" />
+    <None Remove="Images\PL.png" />
+    <None Remove="Images\TextFile.png" />
   </ItemGroup>
 
   <ItemGroup>  
-    <Resource Include="CsFile.png" />
-    <Resource Include="DefaultFile.png" />
-    <Resource Include="EN.png" />
-    <Resource Include="FolderClose.png" />
-    <Resource Include="PdfFile.png" />
-    <Resource Include="PL.png" />
-    <Resource Include="TextFile.png" />
+    <Resource Include="Images\CsFile.png" />
+    <Resource Include="Images\DefaultFile.png" />
+    <Resource Include="Images\EN.png" />
+    <Resource Include="Images\FolderClose.png" />
+    <Resource Include="Images\PdfFile.png" />
+    <Resource Include="Images\PL.png" />
+    <Resource Include="Images\TextFile.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,6 +49,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Languages\" />
   </ItemGroup>
 
 </Project>

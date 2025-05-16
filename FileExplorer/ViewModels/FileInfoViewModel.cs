@@ -1,10 +1,11 @@
 ﻿#region Using Statements
 
-using FileExplorer.Components.FileSystem;
-
 #endregion
 
-namespace FileExplorer
+using System.Windows;
+using System.Windows.Controls;
+
+namespace FileExplorer.ViewModels
 {
     public class FileInfoViewModel : FileSystemInfoViewModel
     {
@@ -12,9 +13,9 @@ namespace FileExplorer
 
         private static Dictionary<string, string> iconsDictionary = new()
         {
-            { "txt", "TextFile.png" },
-            { "pdf", "PdfFile.png" },
-            { "cs", "CsFile.png" },
+            { "txt", "/Images/TextFile.png" },
+            { "pdf", "/Images/PdfFile.png" },
+            { "cs", "/Images/CsFile.png" },
         };
 
         private string _imageSource;

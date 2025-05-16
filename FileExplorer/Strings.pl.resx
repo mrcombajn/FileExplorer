@@ -123,4 +123,28 @@
   <data name="Open_Directory" xml:space="preserve">
     <value>Otwórz katalog</value>
   </data>
+  <data name="ContextMenu_Delete" xml:space="preserve">
+    <value>Usuń</value>
+  </data>
+  <data name="ContextMenu_NewDirectory" xml:space="preserve">
+    <value>Nowy folder</value>
+  </data>
+  <data name="Directory" xml:space="preserve">
+    <value>Katalog</value>
+  </data>
+  <data name="ReadOnly" xml:space="preserve">
+    <value>Tylko do odczytu</value>
+  </data>
+  <data name="Archive" xml:space="preserve">
+    <value>Archiwum</value>
+  </data>
+  <data name="Hidden" xml:space="preserve">
+    <value>Ukryty</value>
+  </data>
+  <data name="System" xml:space="preserve">
+    <value>Systemowy</value>
+  </data>
+  <data name="ContextMenu_Load" xml:space="preserve">
+    <value>Wczytaj</value>
+  </data>
 </root>

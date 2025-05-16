@@ -1,7 +1,7 @@
-﻿
-using System.Globalization;
+﻿using System.Globalization;
+using FileExplorer.ViewModels;
 
-namespace FileExplorer.Components
+namespace FileExplorer
 {
     public class FilesExplorer : ViewModelBase
     {
@@ -42,32 +42,12 @@ namespace FileExplorer.Components
         {
             Root = new DirectoryInfoViewModel();
             Root.Open(path);
+            NotifyPropertyChanged(nameof(Root));
         }
+
+        public void RefreshRoot() => NotifyPropertyChanged(nameof(Root));
 
         #endregion
 
-        #region Static Methods
-
-        internal static void Created()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void Renamed()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void Changed()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void Deleted()
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
     }
 }
