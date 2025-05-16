@@ -29,7 +29,7 @@ namespace FileExplorer {
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public Strings() {
+        internal Strings() {
         }
         
         /// <summary>
@@ -57,6 +57,24 @@ namespace FileExplorer {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Delete.
+        /// </summary>
+        public static string ContextMenu_Delete {
+            get {
+                return ResourceManager.GetString("ContextMenu_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu New directory.
+        /// </summary>
+        public static string ContextMenu_NewDirectory {
+            get {
+                return ResourceManager.GetString("ContextMenu_NewDirectory", resourceCulture);
             }
         }
         

@@ -1,7 +1,9 @@
 ﻿
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Windows;
+using FileExplorer.ViewModels;
 
 namespace FileExplorer
 {
@@ -17,7 +19,7 @@ namespace FileExplorer
             InitializeComponent();
             _filesExplorer = new();
             DataContext = _filesExplorer;
-            _filesExplorer.PropertyChanged += _filesExplorer_PropertyChanged;
+            _filesExplorer.PropertyChanged += FilesExplorer_PropertyChanged;
         }
 
         private void OpenDirMenuItem_Click(object sender, RoutedEventArgs e)
@@ -35,147 +37,46 @@ namespace FileExplorer
             System.Windows.Forms.Application.Exit();
         }
 
-        private void _filesExplorer_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void FilesExplorer_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(_filesExplorer.Lang))
                 CultureResources.ChangeCulture(CultureInfo.CurrentUICulture);
         }
-
-        /*        private void OpenFile_Click(object sender, RoutedEventArgs e)
+        private void DeleteItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (DiskTreeView.SelectedItem is FileSystemInfoViewModel selectedItem)
+            {
+                try
                 {
-                    var dlg = new FolderBrowserDialog() { Description = "Select directory to open" };
+                    if (selectedItem.Model is DirectoryInfo dir)
+                        dir.Delete(recursive: true);
+                    else if (selectedItem.Model is FileInfo file)
+                        file.Delete();
 
-                    dlg.ShowDialog();
-                    directoryInfo = new(dlg.SelectedPath);
-                    UpdateTreeView();
                 }
-
-                private void UpdateTreeView()
+                catch (Exception ex)
                 {
-                    var root = DiskTreeView;
-                    root.Items.Clear();
-
-                    UpdateTreeViewRecurive(root, directoryInfo);
+                    System.Windows.MessageBox.Show($"Błąd: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+            }
+        }
 
-                private void UpdateTreeViewRecurive(ItemsControl itemsControl, DirectoryInfo directoryInfo)
-                {
-                    var item = new TreeViewItem
-                    {
-                        Header = directoryInfo.Name,
-                        Tag = directoryInfo.FullName,
-                    };
-                    item.AddHandler(TreeViewItem.SelectedEvent, new RoutedEventHandler(ShowItemProperties));
-                    item.ContextMenu = CreateContextMenuForDirs(item.Tag.ToString());
+        private void CreateItem_Click(object sender, RoutedEventArgs e)
+        {
 
-                    itemsControl.Items.Add(item);
+        }
 
-                    var files = directoryInfo.GetFiles();
-                    var directories = directoryInfo.GetDirectories();
 
-                    foreach (var directory in directories)
-                    {
-                        UpdateTreeViewRecurive(item, directory);
-                    }
-                    UpdateFilesInTreeView(item, files);
-                }
+/*               private void ShowItemProperties(object sender, RoutedEventArgs e)
+               {
+                   var statusBar = FileProperties;
+                   statusBar.Items.Clear();
 
-                private void UpdateFilesInTreeView(ItemsControl itemsControl, FileInfo[] files)
-                {
-                    foreach (var file in files)
-                    {
-                        var item = new TreeViewItem
-                        {
-                            Header = file.Name,
-                            Tag = file.FullName
-                        };
-                        item.ContextMenu = CreateContextMenuForFiles(item.Tag.ToString());
+                   var x = (TreeViewItem)e.Source;
+                   var properties = FileHandler.GetFileAttributes(x.Tag.ToString());
 
-                        item.AddHandler(TreeViewItem.SelectedEvent, new RoutedEventHandler((obiekt, args) => item.ContextMenu.Visibility = Visibility.Visible));
-                        item.AddHandler(TreeViewItem.SelectedEvent, new RoutedEventHandler(ShowItemProperties));
-
-                        itemsControl.Items.Add(item);
-                    }
-                }
-
-                private void LoadFileContent(object sender, RoutedEventArgs e)
-                {
-                    var x = (MenuItem)e.Source;
-
-                    FileContent.Text = FileHandler.ReadFile(x.Tag.ToString());
-                }
-
-                private void DeleteFile(object sender, RoutedEventArgs e)
-                {
-                    var x = (MenuItem)e.Source;
-                    FileHandler.DeleteFile(x.Tag.ToString());
-
-                    Directories.Items.Clear();
-                    UpdateTreeView();
-                }
-                private void DeleteDirectory(object sender, RoutedEventArgs e)
-                {
-                    var x = (MenuItem)e.Source;
-                    FileHandler.DeleteDirectory(x.Tag.ToString());
-
-                    Directories.Items.Clear();
-                    UpdateTreeView();
-                }
-
-                private void ExitProgram_Click(object sender, RoutedEventArgs e)
-                {
-                    System.Windows.Forms.Application.Exit();
-                }
-
-                private void CreateDialog(object sender, RoutedEventArgs e)
-                {
-                    var x = (MenuItem)e.Source;
-
-                    var dialogWindow = new CreateDialog(x.Tag.ToString());
-
-                    dialogWindow.ShowDialog();
-                    Directories.Items.Clear();
-                    UpdateTreeView();
-                }
-
-                private ContextMenu CreateContextMenuForDirs(string itemTag)
-                {
-                    ContextMenu menu = new ContextMenu();
-                    MenuItem deleteOption = new() { Header = "Delete", Tag = itemTag };
-                    deleteOption.AddHandler(MenuItem.ClickEvent, new RoutedEventHandler(DeleteDirectory));
-                    MenuItem createOption = new() { Header = "Create", Tag = itemTag };
-                    createOption.AddHandler(MenuItem.ClickEvent, new RoutedEventHandler(CreateDialog));
-
-                    menu.Items.Add(deleteOption);
-                    menu.Items.Add(createOption);
-
-                    return menu;
-                }
-
-                private ContextMenu CreateContextMenuForFiles(string itemTag)
-                {
-                    ContextMenu menu = new ContextMenu();
-                    MenuItem openOption = new() { Header = "Open", Tag = itemTag };
-                    openOption.AddHandler(MenuItem.ClickEvent, new RoutedEventHandler(LoadFileContent));
-                    MenuItem deleteOption = new() { Header = "Delete", Tag = itemTag };
-                    deleteOption.AddHandler(MenuItem.ClickEvent, new RoutedEventHandler(DeleteFile));
-
-                    menu.Items.Add(openOption);
-                    menu.Items.Add(deleteOption);
-
-                    return menu;
-                }
-
-                private void ShowItemProperties(object sender, RoutedEventArgs e)
-                {
-                    var statusBar = FileProperties;
-                    statusBar.Items.Clear();
-
-                    var x = (TreeViewItem)e.Source;
-                    var properties = FileHandler.GetFileAttributes(x.Tag.ToString());
-
-                    statusBar.Items.Add(new StatusBarItem() { Content = properties });
-                }*/
+                   statusBar.Items.Add(new StatusBarItem() { Content = properties });
+               }*/
 
     }
 

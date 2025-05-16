@@ -8,18 +8,6 @@
         xmlns:vm="clr-namespace:FileExplorer.ViewModels"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
-        <DataTemplate DataType="{x:Type vm:FileInfoViewModel}">
-            <StackPanel Orientation="Horizontal">
-                <Image Width="16" Source="{Binding ImageSource}"/>
-                <TextBlock Text="{Binding Caption}" Margin="10,0,0,0"/>
-            </StackPanel>
-        </DataTemplate>
-        <HierarchicalDataTemplate DataType="{x:Type vm:DirectoryInfoViewModel}" ItemsSource="{Binding Items}">
-            <StackPanel Orientation="Horizontal">
-                <Image Width="16" Source="FolderClose.png"/>
-                <TextBlock Text="{Binding Caption}" Margin="10,0,0,0" FontWeight="Bold"/>
-            </StackPanel>
-        </HierarchicalDataTemplate>
         <Style x:Key="LangButtonStyle" TargetType="ToggleButton">
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
@@ -62,7 +50,28 @@
         </ToolBarPanel>
 
         <TreeView Name="DiskTreeView" ItemsSource="{Binding Root.Items}" Grid.Row="1" Grid.Column="0">
+            <TreeView.Resources>
+                <ContextMenu x:Key="FileContextMenu">
+                    <MenuItem Header="{Binding Source={StaticResource Strings}, Path=ContextMenu_Delete}" Click="DeleteItem_Click"/>
+                </ContextMenu>
+                <ContextMenu x:Key="DirectoryContextMenu">
+                    <MenuItem Header="{Binding Source={StaticResource Strings}, Path=ContextMenu_NewDirectory}" Click="CreateItem_Click"/>
+                    <MenuItem Header="{Binding Source={StaticResource Strings}, Path=ContextMenu_Delete}" Click="DeleteItem_Click"/>
+                </ContextMenu>
 
+                <DataTemplate DataType="{x:Type vm:FileInfoViewModel}">
+                    <StackPanel Orientation="Horizontal" ContextMenu="{StaticResource FileContextMenu}">
+                        <Image Width="16" Source="{Binding ImageSource}"/>
+                        <TextBlock Text="{Binding Caption}" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </DataTemplate>
+                <HierarchicalDataTemplate DataType="{x:Type vm:DirectoryInfoViewModel}" ItemsSource="{Binding Items}">
+                    <StackPanel Orientation="Horizontal" ContextMenu="{StaticResource DirectoryContextMenu}">
+                        <Image Width="16" Source="Images/FolderClose.png"/>
+                        <TextBlock Text="{Binding Caption}" Margin="10,0,0,0" FontWeight="Bold"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
         </TreeView>
         <StackPanel Grid.Row="2" Grid.RowSpan="2" Grid.Column="0">
             <StatusBar Name="FileProperties"/>

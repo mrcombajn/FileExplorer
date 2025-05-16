@@ -103,4 +103,10 @@
   <data name="Open_Directory" xml:space="preserve">
     <value>Open directory</value>
   </data>
+  <data name="ContextMenu_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ContextMenu_NewDirectory" xml:space="preserve">
+    <value>New directory</value>
+  </data>
 </root>

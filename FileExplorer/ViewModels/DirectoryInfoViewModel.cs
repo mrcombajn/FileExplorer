@@ -32,7 +32,6 @@ namespace FileExplorer.ViewModels
                     itemViewModel.Model = dirInfo;
                     Items.Add(itemViewModel);
 
-
                     itemViewModel.Open(dirInfo.FullName);
                 }
 

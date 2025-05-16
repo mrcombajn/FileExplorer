@@ -42,6 +42,7 @@ namespace FileExplorer
         {
             Root = new DirectoryInfoViewModel();
             Root.Open(path);
+            NotifyPropertyChanged(nameof(Root));
         }
 
         #endregion

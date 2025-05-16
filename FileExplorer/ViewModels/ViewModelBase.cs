@@ -2,6 +2,7 @@
 
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Controls;
 
 #endregion
 
@@ -9,7 +10,8 @@ namespace FileExplorer.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {
-        #region Fields and Constants
+
+        #region Events
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
