@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using FileExplorer.ViewModels;
 
 namespace FileExplorer
@@ -63,7 +64,16 @@ namespace FileExplorer
 
         private void CreateItem_Click(object sender, RoutedEventArgs e)
         {
+            if (sender is MenuItem selectedDir)
+            {
+                 var dataContext = (DirectoryInfoViewModel)selectedDir.DataContext;
 
+                var dialog = new CreateDialog(dataContext.Model.FullName);
+                if (dialog.ShowDialog() == true)
+                {
+                    _filesExplorer.RefreshRoot();
+                }
+            }
         }
 
 

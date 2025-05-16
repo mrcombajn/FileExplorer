@@ -9,6 +9,12 @@ namespace FileExplorer.ViewModels
 {
     public class DirectoryInfoViewModel : FileSystemInfoViewModel
     {
+        #region
+
+        private FileSystemWatcher _fileSystemWatcher;
+
+        #endregion
+
         #region Properties
 
         public ObservableCollection<FileSystemInfoViewModel> Items { get; private set; } = new ObservableCollection<FileSystemInfoViewModel>();
@@ -45,7 +51,7 @@ namespace FileExplorer.ViewModels
                     Items.Add(itemViewModel);
                 }
 
-                CreateFileSystemWatcher(path);
+                _fileSystemWatcher = CreateFileSystemWatcher(path);
             }
             catch (Exception ex)
             {
@@ -77,18 +83,23 @@ namespace FileExplorer.ViewModels
 
         private void OnCreate(object sender, FileSystemEventArgs e)
         {
-            var papiez = new string("");
+            NotifyPropertyChanged(nameof(Items));
+            
         }
 
         private void OnRename(object sender, FileSystemEventArgs e)
         {
+            NotifyPropertyChanged(nameof(Items));
         }
 
         private void OnDelete(object sender, FileSystemEventArgs e)
         {
+            NotifyPropertyChanged(nameof(Items));
         }
+
         private void OnChanged(object sender, FileSystemEventArgs e)
         {
+            NotifyPropertyChanged(nameof(Items));
         }
 
         private void Watcher_Error(object sender, ErrorEventArgs e)

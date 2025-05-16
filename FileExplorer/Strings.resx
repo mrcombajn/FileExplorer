@@ -109,4 +109,19 @@
   <data name="ContextMenu_NewDirectory" xml:space="preserve">
     <value>New directory</value>
   </data>
+  <data name="Directory" xml:space="preserve">
+    <value>Directory</value>
+  </data>
+  <data name="ReadOnly" xml:space="preserve">
+    <value>Read Only</value>
+  </data>
+  <data name="Archive" xml:space="preserve">
+    <value>Archive</value>
+  </data>
+  <data name="Hidden" xml:space="preserve">
+    <value>Hidden</value>
+  </data>
+  <data name="System" xml:space="preserve">
+    <value>System</value>
+  </data>
 </root>

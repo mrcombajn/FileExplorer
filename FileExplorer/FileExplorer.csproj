@@ -10,14 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Components\DirectoryComponents\**" />
-    <Compile Remove="Components\FileInfo\**" />
-    <EmbeddedResource Remove="Components\DirectoryComponents\**" />
-    <EmbeddedResource Remove="Components\FileInfo\**" />
-    <None Remove="Components\DirectoryComponents\**" />
-    <None Remove="Components\FileInfo\**" />
-    <Page Remove="Components\DirectoryComponents\**" />
-    <Page Remove="Components\FileInfo\**" />
+    <Compile Remove="Components\**" />
+    <EmbeddedResource Remove="Components\**" />
+    <None Remove="Components\**" />
+    <Page Remove="Components\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,7 +52,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Components\FileSystem\" />
     <Folder Include="Languages\" />
   </ItemGroup>
 

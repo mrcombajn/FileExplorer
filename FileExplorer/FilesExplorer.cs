@@ -45,6 +45,8 @@ namespace FileExplorer
             NotifyPropertyChanged(nameof(Root));
         }
 
+        public void RefreshRoot() => NotifyPropertyChanged(nameof(Root));
+
         #endregion
 
     }
