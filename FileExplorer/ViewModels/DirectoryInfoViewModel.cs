@@ -12,6 +12,7 @@ namespace FileExplorer.ViewModels
         #region
 
         private FileSystemWatcher _fileSystemWatcher;
+        private System.Timers.Timer _reloadTimer;
 
         #endregion
 
@@ -70,7 +71,7 @@ namespace FileExplorer.ViewModels
 
             watcher.IncludeSubdirectories = false;
             watcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.DirectoryName | NotifyFilters.LastWrite;
-
+             
             watcher.Created += OnCreate;
             watcher.Renamed += OnRename;
             watcher.Deleted += OnDelete;
@@ -81,34 +82,56 @@ namespace FileExplorer.ViewModels
             return watcher;
         }
 
-        private void OnCreate(object sender, FileSystemEventArgs e)
-        {
-            NotifyPropertyChanged(nameof(Items));
-            
-        }
+        private void OnCreate(object sender, FileSystemEventArgs e) => StartDebouncedReload();
 
-        private void OnRename(object sender, FileSystemEventArgs e)
-        {
-            NotifyPropertyChanged(nameof(Items));
-        }
+        private void OnRename(object sender, FileSystemEventArgs e) => StartDebouncedReload();
 
-        private void OnDelete(object sender, FileSystemEventArgs e)
-        {
-            NotifyPropertyChanged(nameof(Items));
-        }
+        private void OnDelete(object sender, FileSystemEventArgs e) => StartDebouncedReload();
 
-        private void OnChanged(object sender, FileSystemEventArgs e)
-        {
-            NotifyPropertyChanged(nameof(Items));
-        }
+        private void OnChanged(object sender, FileSystemEventArgs e) => StartDebouncedReload();
 
         private void Watcher_Error(object sender, ErrorEventArgs e)
         {
-            MessageBox.Show($"Exception: {e.ToString()}");
+           // MessageBox.Show($"Exception: {e.ToString()}");
+        }
+
+        private void StartDebouncedReload()
+        {
+            if (_reloadTimer != null)
+            {
+                _reloadTimer.Stop();
+                _reloadTimer.Dispose();
+            }
+
+            _reloadTimer = new System.Timers.Timer(500); // 500ms opóźnienia
+            _reloadTimer.Elapsed += (s, e) =>
+            {
+                _reloadTimer.Stop();
+                _reloadTimer.Dispose();
+                _reloadTimer = null;
+
+                System.Windows.Application.Current.Dispatcher.Invoke(() => Reload());
+            };
+            _reloadTimer.Start();
+        }
+
+        private void Reload()
+        {
+            if (Model == null)
+                return;
+
+            if (System.Windows.Application.Current.MainWindow.DataContext is FilesExplorer explorer && explorer.Root?.Model?.FullName == this.Model?.FullName)
+            {
+                explorer.RefreshRoot();
+            }
+            else
+            {
+                Items.Clear();
+                Open(Model.FullName);
+            }
         }
 
         #endregion
-
 
     }
 }

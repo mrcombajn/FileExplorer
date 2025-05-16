@@ -79,6 +79,15 @@ namespace FileExplorer {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Load.
+        /// </summary>
+        public static string ContextMenu_Load {
+            get {
+                return ResourceManager.GetString("ContextMenu_Load", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu New directory.
         /// </summary>
         public static string ContextMenu_NewDirectory {

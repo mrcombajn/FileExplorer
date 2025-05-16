@@ -124,4 +124,7 @@
   <data name="System" xml:space="preserve">
     <value>System</value>
   </data>
+  <data name="ContextMenu_Load" xml:space="preserve">
+    <value>Load</value>
+  </data>
 </root>

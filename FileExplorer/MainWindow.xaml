@@ -53,6 +53,7 @@
             <TreeView.Resources>
                 <ContextMenu x:Key="FileContextMenu">
                     <MenuItem Header="{Binding Source={StaticResource Strings}, Path=ContextMenu_Delete}" Click="DeleteItem_Click"/>
+                    <MenuItem Header="{Binding Source={StaticResource Strings}, Path=ContextMenu_Load}" Click="FileSelected_Click"/>
                 </ContextMenu>
                 <ContextMenu x:Key="DirectoryContextMenu">
                     <MenuItem Header="{Binding Source={StaticResource Strings}, Path=ContextMenu_NewDirectory}" Click="CreateItem_Click"/>

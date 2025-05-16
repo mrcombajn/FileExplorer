@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using FileExplorer.ViewModels;
 
 namespace FileExplorer
@@ -66,7 +67,7 @@ namespace FileExplorer
         {
             if (sender is MenuItem selectedDir)
             {
-                 var dataContext = (DirectoryInfoViewModel)selectedDir.DataContext;
+                var dataContext = (DirectoryInfoViewModel)selectedDir.DataContext;
 
                 var dialog = new CreateDialog(dataContext.Model.FullName);
                 if (dialog.ShowDialog() == true)
@@ -76,17 +77,41 @@ namespace FileExplorer
             }
         }
 
+        private void FileSelected_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuItem selectedFile)
+            {
+                var fileInfoModel = (FileInfoViewModel)selectedFile.DataContext;
 
-/*               private void ShowItemProperties(object sender, RoutedEventArgs e)
-               {
-                   var statusBar = FileProperties;
-                   statusBar.Items.Clear();
 
-                   var x = (TreeViewItem)e.Source;
-                   var properties = FileHandler.GetFileAttributes(x.Tag.ToString());
+                try
+                {
+                    FileContent.Text = File.ReadAllText(fileInfoModel.Model.FullName);
+                }
+                catch
+                {
+                    FileContent.Text = "Błąd wczytywania pliku";
+                }
 
-                   statusBar.Items.Add(new StatusBarItem() { Content = properties });
-               }*/
+                ShowItemProperties(fileInfoModel.Model);
+            }
+
+        }
+
+        private void ShowItemProperties(FileSystemInfo info)
+        {
+            var attributes = info.Attributes;
+            string attr = "";
+            attr += attributes.HasFlag(FileAttributes.ReadOnly) ? "r" : "-";
+            attr += attributes.HasFlag(FileAttributes.Archive) ? "a" : "-";
+            attr += attributes.HasFlag(FileAttributes.System) ? "s" : "-";
+            attr += attributes.HasFlag(FileAttributes.Hidden) ? "h" : "-";
+
+            var statusBar = FileProperties;
+            statusBar.Items.Clear();
+
+            statusBar.Items.Add(attr);
+        }
 
     }
 

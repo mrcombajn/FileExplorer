@@ -144,4 +144,7 @@
   <data name="System" xml:space="preserve">
     <value>Systemowy</value>
   </data>
+  <data name="ContextMenu_Load" xml:space="preserve">
+    <value>Wczytaj</value>
+  </data>
 </root>
