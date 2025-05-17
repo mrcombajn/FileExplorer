@@ -1,10 +1,26 @@
-﻿using System.Globalization;
+﻿#region Using Statements
+
+using System.Globalization;
 using FileExplorer.ViewModels;
+using GalaSoft.MvvmLight.Command;
+
+#endregion
 
 namespace FileExplorer
 {
     public class FilesExplorer : ViewModelBase
     {
+
+        #region Constructors and Deconstructors 
+
+        public FilesExplorer()
+        {
+            NotifyPropertyChanged(nameof(Lang));
+            OpenRootFolderCommand = new RelayCommand(OpenRootFolderExecute);
+        }
+
+        #endregion
+
         #region Properties
 
         public DirectoryInfoViewModel? Root { get; set; }
@@ -25,14 +41,7 @@ namespace FileExplorer
             }
         }
 
-        #endregion
-
-        #region Constructors and Deconstructors 
-
-        public FilesExplorer()
-        {
-            NotifyPropertyChanged(nameof(Lang));
-        }
+        public RelayCommand OpenRootFolderCommand { get; private set; }
 
         #endregion
 
@@ -46,6 +55,20 @@ namespace FileExplorer
         }
 
         public void RefreshRoot() => NotifyPropertyChanged(nameof(Root));
+
+        #endregion
+
+        #region Private Methods
+
+        private void OpenRootFolderExecute()
+        {
+            var dlg = new FolderBrowserDialog() { Description = Strings.SelectDirectory };
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                var path = dlg.SelectedPath;
+                OpenRoot(path);
+            }
+        }
 
         #endregion
 

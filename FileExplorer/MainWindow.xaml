@@ -33,9 +33,9 @@
         <DockPanel Grid.Row="0" Grid.ColumnSpan="2">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="{Binding Source={StaticResource Strings}, Path=File}">
-                    <MenuItem Header="{Binding Source={StaticResource Strings}, Path=Open_Directory}" Name="OpenFile" Click="OpenDirMenuItem_Click"/>
+                    <MenuItem Header="{Binding Source={StaticResource Strings}, Path=Open_Directory}" Name="OpenFile" Command="{Binding OpenRootFolderCommand}"/>
                     <Separator/>
-                    <MenuItem Header="_Exit" Name="ExitProgram" Click="ExitProgram_Click"/>
+                    <MenuItem Header="{Binding Source={StaticResource Strings}, Path=Exit}" Name="ExitProgram" Click="ExitProgram_Click"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
