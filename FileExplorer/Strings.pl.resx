@@ -147,4 +147,10 @@
   <data name="ContextMenu_Load" xml:space="preserve">
     <value>Wczytaj</value>
   </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Wyjdź</value>
+  </data>
+  <data name="SelectDirectory" xml:space="preserve">
+    <value>Wybierz katalog do otwarcia</value>
+  </data>
 </root>

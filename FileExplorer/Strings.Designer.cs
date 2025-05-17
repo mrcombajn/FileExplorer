@@ -106,6 +106,15 @@ namespace FileExplorer {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Exit.
+        /// </summary>
+        public static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu File.
         /// </summary>
         public static string File {
@@ -138,6 +147,15 @@ namespace FileExplorer {
         public static string ReadOnly {
             get {
                 return ResourceManager.GetString("ReadOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Select directory to open.
+        /// </summary>
+        public static string SelectDirectory {
+            get {
+                return ResourceManager.GetString("SelectDirectory", resourceCulture);
             }
         }
         

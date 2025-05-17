@@ -24,16 +24,7 @@ namespace FileExplorer
             _filesExplorer.PropertyChanged += FilesExplorer_PropertyChanged;
         }
 
-        private void OpenDirMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            var dlg = new FolderBrowserDialog() { Description = "Select directory to open" };
-
-            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                var path = dlg.SelectedPath;
-                _filesExplorer.OpenRoot(path);
-            }
-        }
+        private void OpenDirMenuItem_Click(object sender, RoutedEventArgs e) => _filesExplorer.OpenRootFolderCommand.Execute(null);
         private void ExitProgram_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.Application.Exit();
