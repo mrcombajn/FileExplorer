@@ -28,17 +28,17 @@
         </GroupBox>
 
         <Grid Grid.Row="1" Grid.Column="1">
-                        
+
         </Grid>
         <Grid Grid.Row="2" Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition/>
+                <RowDefinition Height="28.404"/>
+                <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBlock Text="{Binding Source={StaticResource Strings}, Path=ReadOnly}">
-                <CheckBox Name="ReadOnlyOption" IsChecked="False"/> 
+                <CheckBox Name="ReadOnlyOption" IsChecked="False"/>
             </TextBlock>
             <TextBlock Grid.Row="1" Text="{Binding Source={StaticResource Strings}, Path=Archive}">
                 <CheckBox Name="ArchiveOption" IsChecked="False"/>

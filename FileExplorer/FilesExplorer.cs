@@ -17,6 +17,9 @@ namespace FileExplorer
         {
             NotifyPropertyChanged(nameof(Lang));
             OpenRootFolderCommand = new RelayCommand(OpenRootFolderExecute);
+            SortRootFolderCommand = new RelayCommand(
+                SortRootFolderExecute,
+                () => Root != null);
         }
 
         #endregion
@@ -42,6 +45,7 @@ namespace FileExplorer
         }
 
         public RelayCommand OpenRootFolderCommand { get; private set; }
+        public RelayCommand SortRootFolderCommand { get; private set; }
 
         #endregion
 
@@ -68,6 +72,11 @@ namespace FileExplorer
                 var path = dlg.SelectedPath;
                 OpenRoot(path);
             }
+        }
+
+        private void SortRootFolderExecute()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
