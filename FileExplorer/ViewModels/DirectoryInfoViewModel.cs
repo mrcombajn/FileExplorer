@@ -64,13 +64,15 @@ namespace FileExplorer.ViewModels
 
         public void Sort(DirectoryInfoViewModel root, SortOptionsViewModel sortOptions)
         {
-            if (sortOptions.SortDirection == Enums.SortDirection.INCREASING)
+            if (sortOptions.SortDirection == Enums.SortDirection.Ascending)
                 root.Items = new(root.Items.OrderBy(x => GetSortKey(x, sortOptions)));
             else
                 root.Items = new(root.Items.OrderByDescending(x => GetSortKey(x, sortOptions)));
 
             foreach (var item in root.Items.OfType<DirectoryInfoViewModel>())
                 Sort(item, sortOptions);
+
+            NotifyPropertyChanged(nameof(Items));
         }
 
         #endregion
@@ -147,10 +149,10 @@ namespace FileExplorer.ViewModels
         {
             switch (options.SortBy)
             {
-                case SortBy.ALPHABETICALLY: return item.Caption;
-                case SortBy.EXTENSION: return (item.Model as FileInfo)?.Extension ?? "";
-                case SortBy.SIZE: return (item.Model as FileInfo)?.Length ?? 0;
-                case SortBy.MODIFICATION: return item.LastWriteTime;
+                case SortBy.Alphabetically: return item.Caption;
+                case SortBy.Extension: return (item.Model as FileInfo)?.Extension ?? "";
+                case SortBy.Size: return (item.Model as FileInfo)?.Length ?? 0;
+                case SortBy.Modification: return item.LastWriteTime;
                 default: return item.Caption;
             }
         }

@@ -1,6 +1,7 @@
 ﻿#region Using Statements
 
 using System.Windows;
+using FileExplorer.ViewModels;
 
 #endregion
 
@@ -13,16 +14,43 @@ namespace FileExplorer.Dialogs
     {
         #region Fields and Constants
 
-        private SortOptionsViewModel _sortOptionsViewModel;
+        private SortDialogViewModel _sortDialogViewModel;
 
         #endregion
 
         #region Constructors and Deconstructors
 
+
         public SortDialog()
         {
             InitializeComponent();
-            _sortOptionsViewModel = new();
+            _sortDialogViewModel = new();
+
+            DataContext = _sortDialogViewModel;
+
+            Loaded += (s, e) =>
+            {
+                if (DataContext is SortDialogViewModel vm)
+                {
+                    vm.RequestClose += (sender, args) =>
+                    {
+                        DialogResult = true;
+                        Close();
+                    };
+                }
+            };
+        }
+
+        #endregion
+
+        #region Properties
+
+        public SortDialogViewModel SortDialogViewModel
+        {
+            get
+            {
+                return _sortDialogViewModel;
+            }
         }
 
         #endregion

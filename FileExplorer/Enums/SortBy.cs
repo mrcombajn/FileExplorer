@@ -2,9 +2,9 @@
 {
     public enum SortBy
     {
-        ALPHABETICALLY,
-        EXTENSION,
-        SIZE,
-        MODIFICATION,
+        Alphabetically,
+        Extension,
+        Size,
+        Modification,
     }
 }

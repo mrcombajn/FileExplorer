@@ -11,7 +11,7 @@ namespace FileExplorer
     {
         #region Fields and Constants
 
-        private SortBy _sortType;
+        private SortBy _sortBy;
 
         private SortDirection _sortDirection;
 
@@ -21,15 +21,15 @@ namespace FileExplorer
 
         public SortBy SortBy
         {
-            get { return _sortType; }
+            get { return _sortBy; }
 
             set
             {
                 if (value != null)
                 {
-                    if (_sortType != value)
+                    if (_sortBy != value)
                     {
-                        _sortType = value;
+                        _sortBy = value;
                         NotifyPropertyChanged();
                     }
                 }

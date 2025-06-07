@@ -20,7 +20,8 @@ namespace FileExplorer
             OpenRootFolderCommand = new RelayCommand(OpenRootFolderExecute);
             SortRootFolderCommand = new RelayCommand(
                 SortRootFolderExecute,
-                () => Root != null);
+                () => true);
+            //Root != null && Root.Items.Count > 0
         }
 
         #endregion
@@ -73,16 +74,16 @@ namespace FileExplorer
                 var path = dlg.SelectedPath;
                 OpenRoot(path);
             }
+            NotifyPropertyChanged(nameof(Root));
         }
 
         private void SortRootFolderExecute()
         {
-            var vm = new SortOptionsViewModel();
-            var dlg = new SortDialog { DataContext = vm };
+            var dlg = new SortDialog();
 
             if (dlg.ShowDialog() == true)
             {
-                Root?.Sort(Root, vm);
+                Root?.Sort(Root, dlg.SortDialogViewModel.SortOptionsViewModel);
             }
         }
 
