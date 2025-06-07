@@ -7,8 +7,8 @@
       xmlns:converters="clr-namespace:FileExplorer.Converters"
       xmlns:vm="clr-namespace:FileExplorer.ViewModels"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="SortDialog">
+      Height="300" Width="300"
+      Title="{Binding Source={StaticResource Strings}, Path=Text_SortBy}">
 
     <Window.Resources>
         <converters:SortDirectionConverter x:Key="SortDirectionConverter"/>
@@ -48,11 +48,11 @@
         <StackPanel Grid.Row="1">
             <TextBlock Text="{Binding Source={StaticResource Strings}, Path=Text_SortDirection}"/>
             <ToolBarPanel Orientation="Horizontal">
-                <RadioButton IsChecked="{Binding SortOptionsViewModel.SortDirection, Converter={StaticResource SortByConverter}, ConverterParameter=Ascending, Mode=TwoWay}" />
+                <RadioButton IsChecked="{Binding SortOptionsViewModel.SortDirection, Converter={StaticResource SortDirectionConverter}, ConverterParameter=Ascending, Mode=TwoWay}" />
                 <TextBlock Text="{Binding Source={StaticResource Strings}, Path=SortType_Increasing}"/>
             </ToolBarPanel>
             <ToolBarPanel Orientation="Horizontal">
-                <RadioButton IsChecked="{Binding SortOptionsViewModel.SortDirection, Converter={StaticResource SortByConverter}, ConverterParameter=Descending, Mode=TwoWay}" />
+                <RadioButton IsChecked="{Binding SortOptionsViewModel.SortDirection, Converter={StaticResource SortDirectionConverter}, ConverterParameter=Descending, Mode=TwoWay}" />
                 <TextBlock Text="{Binding Source={StaticResource Strings}, Path=SortType_Decreasing}"/>
             </ToolBarPanel>
         </StackPanel>
