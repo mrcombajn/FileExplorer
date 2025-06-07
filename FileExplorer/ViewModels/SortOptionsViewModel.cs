@@ -7,11 +7,11 @@ using FileExplorer.ViewModels;
 
 namespace FileExplorer
 {
-    class SortOptionsViewModel : ViewModelBase
+    public class SortOptionsViewModel : ViewModelBase
     {
         #region Fields and Constants
 
-        private SortType _sortType;
+        private SortBy _sortType;
 
         private SortDirection _sortDirection;
 
@@ -19,7 +19,7 @@ namespace FileExplorer
 
         #region Properties
 
-        public SortType SortBy
+        public SortBy SortBy
         {
             get { return _sortType; }
 

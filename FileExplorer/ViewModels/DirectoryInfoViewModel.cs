@@ -2,6 +2,7 @@
 
 using System.Collections.ObjectModel;
 using System.IO;
+using static System.Windows.Forms.Design.AxImporter;
 
 #endregion
 
@@ -61,6 +62,17 @@ namespace FileExplorer.ViewModels
             return result;
         }
 
+        public void Sort(DirectoryInfoViewModel root, SortOptionsViewModel sortOptions)
+        {
+            if (sortOptions.SortDirection == Enums.SortDirection.INCREASING)
+                root.Items = new(root.Items.OrderBy(x => GetSortKey(x, sortOptions)));
+            else
+                root.Items = new(root.Items.OrderByDescending(x => GetSortKey(x, sortOptions)));
+
+            foreach (var item in root.Items.OfType<DirectoryInfoViewModel>())
+                Sort(item, sortOptions);
+        }
+
         #endregion
 
         #region Private Methods
@@ -92,7 +104,7 @@ namespace FileExplorer.ViewModels
 
         private void Watcher_Error(object sender, ErrorEventArgs e)
         {
-           // MessageBox.Show($"Exception: {e.ToString()}");
+            MessageBox.Show($"Exception: {e.ToString()}");
         }
 
         private void StartDebouncedReload()
@@ -128,6 +140,18 @@ namespace FileExplorer.ViewModels
             {
                 Items.Clear();
                 Open(Model.FullName);
+            }
+        }
+
+        private object GetSortKey(FileSystemInfoViewModel item, SortOptionsViewModel options)
+        {
+            switch (options.SortBy)
+            {
+                case SortBy.ALPHABETICALLY: return item.Caption;
+                case SortBy.EXTENSION: return (item.Model as FileInfo)?.Extension ?? "";
+                case SortBy.SIZE: return (item.Model as FileInfo)?.Length ?? 0;
+                case SortBy.MODIFICATION: return item.LastWriteTime;
+                default: return item.Caption;
             }
         }
 

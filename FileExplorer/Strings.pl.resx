@@ -153,4 +153,31 @@
   <data name="SelectDirectory" xml:space="preserve">
     <value>Wybierz katalog do otwarcia</value>
   </data>
+  <data name="SortBy_Alphabetically" xml:space="preserve">
+    <value>Alfabetycznie</value>
+  </data>
+  <data name="SortBy_Extension" xml:space="preserve">
+    <value>Według rozszerzeń</value>
+  </data>
+  <data name="SortBy_Size" xml:space="preserve">
+    <value>Według rozmiaru</value>
+  </data>
+  <data name="SortBy_Modification" xml:space="preserve">
+    <value>Według daty ostatniej modyfikacji</value>
+  </data>
+  <data name="SortType_Increasing" xml:space="preserve">
+    <value>Rosnąco</value>
+  </data>
+  <data name="SortType_Decreasing" xml:space="preserve">
+    <value>Malejąco</value>
+  </data>
+  <data name="Text_SortDirection" xml:space="preserve">
+    <value>Tryb sortowania</value>
+  </data>
+  <data name="Text_SortBy" xml:space="preserve">
+    <value>Sortuj po</value>
+  </data>
+  <data name="Sort_Directory" xml:space="preserve">
+    <value>Sortuj</value>
+  </data>
 </root>

@@ -1,6 +1,7 @@
 ﻿#region Using Statements
 
 using System.Globalization;
+using FileExplorer.Dialogs;
 using FileExplorer.ViewModels;
 using GalaSoft.MvvmLight.Command;
 
@@ -76,7 +77,13 @@ namespace FileExplorer
 
         private void SortRootFolderExecute()
         {
-            throw new NotImplementedException();
+            var vm = new SortOptionsViewModel();
+            var dlg = new SortDialog { DataContext = vm };
+
+            if (dlg.ShowDialog() == true)
+            {
+                Root?.Sort(Root, vm);
+            }
         }
 
         #endregion

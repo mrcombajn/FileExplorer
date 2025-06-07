@@ -4,11 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FileExplorer.Dialogs"
+      xmlns:converters="clr-namespace:FileExplorer.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="450"
       Title="SortDialog">
 
     <Window.Resources>
+        <converters:SortDirectionConverter x:Key="SortDirectionConverter"/>
+        <converters:SortByConverter x:Key="SortByConverter"/>
         <Style x:Key="{x:Type RadioButton}" TargetType="{x:Type RadioButton}">
             <Setter Property="Margin" Value="5" />
         </Style>
@@ -23,32 +26,33 @@
             <RowDefinition Height="0.05*"/>
         </Grid.RowDefinitions>
         <StackPanel>
+            <TextBlock Text="{Binding Source={StaticResource Strings}, Path=Text_SortBy}"/>
             <ToolBarPanel Orientation="Horizontal">
-                <RadioButton/>
-                <TextBlock Text="Alfabetycznie"/>
+                <RadioButton IsChecked="{Binding SortOptions.SortType, Converter={StaticResource SortByConverter}, ConverterParameter=Alphabetically, Mode=TwoWay}" />
+                <TextBlock Text="{Binding Source={StaticResource Strings}, Path=SortBy_Alphabetically}"/>
             </ToolBarPanel>
             <ToolBarPanel Orientation="Horizontal">
-                <RadioButton/>
-                <TextBlock Text="Według rozszerzeń"/>
+                <RadioButton IsChecked="{Binding SortOptions.SortType, Converter={StaticResource SortByConverter}, ConverterParameter=Extension, Mode=TwoWay}" />
+                <TextBlock Text="{Binding Source={StaticResource Strings}, Path=SortBy_Extension}"/>
             </ToolBarPanel>
             <ToolBarPanel Orientation="Horizontal">
-                <RadioButton/>
-                <TextBlock Text="Według rozmiaru"/>
+                <RadioButton IsChecked="{Binding SortOptions.SortType, Converter={StaticResource SortByConverter}, ConverterParameter=Size, Mode=TwoWay}" />
+                <TextBlock Text="{Binding Source={StaticResource Strings}, Path=SortBy_Size}"/>
             </ToolBarPanel>
             <ToolBarPanel Orientation="Horizontal">
-                <RadioButton/>
-                <TextBlock Text="Według daty ostatniej modyfikacji"/>
+                <RadioButton IsChecked="{Binding SortOptions.SortType, Converter={StaticResource SortByConverter}, ConverterParameter=Modification, Mode=TwoWay}" />
+                <TextBlock Text="{Binding Source={StaticResource Strings}, Path=SortBy_Modification}"/>
             </ToolBarPanel>
         </StackPanel>
         <StackPanel Grid.Row="1">
-            <TextBlock Text="Tryb sortowania"/>
+            <TextBlock Text="{Binding Source={StaticResource Strings}, Path=Text_SortDirection}"/>
             <ToolBarPanel Orientation="Horizontal">
-                <RadioButton/>
-                <TextBlock Text="Rosnąco"/>
+                <RadioButton IsChecked="{Binding SortOptions.SortType, Converter={StaticResource SortByConverter}, ConverterParameter=Increasing, Mode=TwoWay}" />
+                <TextBlock Text="{Binding Source={StaticResource Strings}, Path=SortType_Increasing}"/>
             </ToolBarPanel>
             <ToolBarPanel Orientation="Horizontal">
-                <RadioButton/>
-                <TextBlock Text="Malejąco"/>
+                <RadioButton IsChecked="{Binding SortOptions.SortType, Converter={StaticResource SortByConverter}, ConverterParameter=Decreasing, Mode=TwoWay}" />
+                <TextBlock Text="{Binding Source={StaticResource Strings}, Path=SortType_Decreasing}"/>
             </ToolBarPanel>
         </StackPanel>
     </Grid>

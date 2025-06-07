@@ -1,6 +1,6 @@
 ﻿namespace FileExplorer
 {
-    enum SortType
+    public enum SortBy
     {
         ALPHABETICALLY,
         EXTENSION,

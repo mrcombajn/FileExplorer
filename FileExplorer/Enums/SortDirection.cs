@@ -1,6 +1,6 @@
 ﻿namespace FileExplorer.Enums
 {
-    enum SortDirection
+    public enum SortDirection
     {
         INCREASING,
         DECREASING,

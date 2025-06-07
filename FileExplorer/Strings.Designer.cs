@@ -160,11 +160,92 @@ namespace FileExplorer {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Sort.
+        /// </summary>
+        public static string Sort_Directory {
+            get {
+                return ResourceManager.GetString("Sort_Directory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Alphabetically.
+        /// </summary>
+        public static string SortBy_Alphabetically {
+            get {
+                return ResourceManager.GetString("SortBy_Alphabetically", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu By extension.
+        /// </summary>
+        public static string SortBy_Extension {
+            get {
+                return ResourceManager.GetString("SortBy_Extension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu By modification date.
+        /// </summary>
+        public static string SortBy_Modification {
+            get {
+                return ResourceManager.GetString("SortBy_Modification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu By size.
+        /// </summary>
+        public static string SortBy_Size {
+            get {
+                return ResourceManager.GetString("SortBy_Size", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Decreasing.
+        /// </summary>
+        public static string SortType_Decreasing {
+            get {
+                return ResourceManager.GetString("SortType_Decreasing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Increasing.
+        /// </summary>
+        public static string SortType_Increasing {
+            get {
+                return ResourceManager.GetString("SortType_Increasing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu System.
         /// </summary>
         public static string System {
             get {
                 return ResourceManager.GetString("System", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Sort By.
+        /// </summary>
+        public static string Text_SortBy {
+            get {
+                return ResourceManager.GetString("Text_SortBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Sort Type.
+        /// </summary>
+        public static string Text_SortDirection {
+            get {
+                return ResourceManager.GetString("Text_SortDirection", resourceCulture);
             }
         }
     }
