@@ -15,6 +15,8 @@ namespace FileExplorer.ViewModels
         private DateTime? _creationTime;
 
         private string? _caption;
+        private string? _extension;
+        private int? _data;
         private FileSystemInfo? _fileSystemInfo;
 
         #endregion
@@ -34,6 +36,8 @@ namespace FileExplorer.ViewModels
                     LastAccessTime = value?.LastAccessTime;
                     CreationTime = value?.CreationTime;
                     Caption = value?.Name;
+                    Extension = value?.Extension;
+
 
                     NotifyPropertyChanged();
                 }
@@ -87,6 +91,19 @@ namespace FileExplorer.ViewModels
                 if (_caption != value)
                 {
                     _caption = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public string? Extension
+        {
+            get { return _extension; }
+            set
+            {
+                if (_extension != value)
+                {
+                    _extension = value;
                     NotifyPropertyChanged();
                 }
             }

@@ -1,11 +1,13 @@
-﻿
+﻿#region Using Statements
+
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using FileExplorer.ViewModels;
+
+#endregion
 
 namespace FileExplorer
 {
@@ -14,7 +16,13 @@ namespace FileExplorer
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Fields and Constants
+
         private FilesExplorer _filesExplorer;
+
+        #endregion
+
+        #region Constructors and Deconstructors
 
         public MainWindow()
         {
@@ -23,6 +31,10 @@ namespace FileExplorer
             DataContext = _filesExplorer;
             _filesExplorer.PropertyChanged += FilesExplorer_PropertyChanged;
         }
+
+        #endregion
+
+        #region Private Methods
 
         private void OpenDirMenuItem_Click(object sender, RoutedEventArgs e) => _filesExplorer.OpenRootFolderCommand.Execute(null);
         private void ExitProgram_Click(object sender, RoutedEventArgs e)
@@ -104,6 +116,7 @@ namespace FileExplorer
             statusBar.Items.Add(attr);
         }
 
+        #endregion
     }
 
 }

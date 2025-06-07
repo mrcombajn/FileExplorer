@@ -1,6 +1,7 @@
 ﻿#region Using Statements
 
 using System.Globalization;
+using FileExplorer.Dialogs;
 using FileExplorer.ViewModels;
 using GalaSoft.MvvmLight.Command;
 
@@ -17,6 +18,10 @@ namespace FileExplorer
         {
             NotifyPropertyChanged(nameof(Lang));
             OpenRootFolderCommand = new RelayCommand(OpenRootFolderExecute);
+            SortRootFolderCommand = new RelayCommand(
+                SortRootFolderExecute,
+                () => true);
+            //Root != null && Root.Items.Count > 0
         }
 
         #endregion
@@ -42,6 +47,7 @@ namespace FileExplorer
         }
 
         public RelayCommand OpenRootFolderCommand { get; private set; }
+        public RelayCommand SortRootFolderCommand { get; private set; }
 
         #endregion
 
@@ -67,6 +73,17 @@ namespace FileExplorer
             {
                 var path = dlg.SelectedPath;
                 OpenRoot(path);
+            }
+            NotifyPropertyChanged(nameof(Root));
+        }
+
+        private void SortRootFolderExecute()
+        {
+            var dlg = new SortDialog();
+
+            if (dlg.ShowDialog() == true)
+            {
+                Root?.Sort(Root, dlg.SortDialogViewModel.SortOptionsViewModel);
             }
         }
 

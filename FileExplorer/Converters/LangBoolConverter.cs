@@ -1,10 +1,16 @@
-﻿using System.Globalization;
+﻿#region Using Statements
+
+using System.Globalization;
 using System.Windows.Data;
+
+#endregion
 
 namespace FileExplorer.Converters
 {
     public class LangBoolConverter : IValueConverter
     {
+        #region Public Methods
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if ((string)value == (string)parameter)
@@ -18,5 +24,7 @@ namespace FileExplorer.Converters
                 return (string)parameter;
             return null;
         }
+
+        #endregion
     }
 }

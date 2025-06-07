@@ -37,6 +37,7 @@
                     <Separator/>
                     <MenuItem Header="{Binding Source={StaticResource Strings}, Path=Exit}" Name="ExitProgram" Click="ExitProgram_Click"/>
                 </MenuItem>
+                <MenuItem Header="{Binding Source={StaticResource Strings}, Path=Sort_Directory}" Command="{Binding DataContext.SortRootFolderCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}" />
             </Menu>
         </DockPanel>
         <ToolBarPanel Orientation="Horizontal" Grid.Column="1" Background="{x:Static SystemColors.ControlLightBrush}">
