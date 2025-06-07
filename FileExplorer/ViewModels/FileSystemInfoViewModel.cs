@@ -21,7 +21,37 @@ namespace FileExplorer.ViewModels
 
         #endregion
 
+        #region Constructors and Deconstructors
+
+        public FileSystemInfoViewModel(ViewModelBase owner)
+        {
+            Owner = owner;
+        }
+        public FileSystemInfoViewModel()
+            : this(null)
+        {
+        }
+
+        #endregion
+
         #region Properties
+
+        public FilesExplorer OwnerExplorer
+        {
+            get
+            {
+                var owner = Owner;
+                while (owner is DirectoryInfoViewModel ownerDirectory)
+                    {
+                        if (ownerDirectory.Owner is FilesExplorer explorer)
+                            return explorer;
+                        owner = ownerDirectory.Owner;
+                    }
+                    return null;
+            }
+        }
+
+        public ViewModelBase Owner { get; set; }
 
         public FileSystemInfo? Model
         {

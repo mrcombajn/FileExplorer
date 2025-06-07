@@ -1,6 +1,7 @@
 ﻿#region Using Statements
 
 using System.Globalization;
+using System.IO;
 using FileExplorer.Dialogs;
 using FileExplorer.ViewModels;
 using GalaSoft.MvvmLight.Command;
@@ -11,6 +12,11 @@ namespace FileExplorer
 {
     public class FilesExplorer : ViewModelBase
     {
+        #region Fields and Constants
+
+        public static readonly string[] TextFilesExtensions = new string[] { ".txt", ".ini", ".log" };
+
+        #endregion
 
         #region Constructors and Deconstructors 
 
@@ -21,7 +27,16 @@ namespace FileExplorer
             SortRootFolderCommand = new RelayCommand(
                 SortRootFolderExecute,
                 () => Root != null && Root.Items.Count > 0);
+            OpenFileCommand = new RelayCommand(
+                () => OnOpenFileRequest.Invoke(),
+                OpenFileCanExecute);
         }
+
+        #endregion
+
+        #region Events
+
+        public event EventHandler<FileInfoViewModel> OnOpenFileRequest;
 
         #endregion
 
@@ -48,6 +63,8 @@ namespace FileExplorer
         public RelayCommand OpenRootFolderCommand { get; private set; }
         public RelayCommand SortRootFolderCommand { get; private set; }
 
+        public RelayCommand OpenFileCommand { get; private set; }
+
         #endregion
 
         #region Public Methods
@@ -60,6 +77,16 @@ namespace FileExplorer
         }
 
         public void RefreshRoot() => NotifyPropertyChanged(nameof(Root));
+
+        public object GetFileContent(FileInfoViewModel viewModel)
+        {
+            var extension = viewModel.Extension?.ToLower();
+            if (TextFilesExtensions.Contains(extension))
+            {
+                return GetTextFileContent(viewModel);
+            }
+            return null;
+        }
 
         #endregion
 
@@ -84,6 +111,22 @@ namespace FileExplorer
             {
                 Root?.Sort(Root, dlg.SortDialogViewModel.SortOptionsViewModel);
             }
+        }
+
+        private bool OpenFileCanExecute(object parameter)
+        {
+            if(parameter is FileInfoViewModel viewModel)
+            {
+                var extension = viewModel.Extension?.ToLower();
+                return TextFilesExtensions.Contains(extension);
+            }
+
+            return false;
+        }
+
+        private string GetTextFileContent(FileInfoViewModel fileInfoViewModel)
+        {
+            return File.ReadAllText(fileInfoViewModel.Model.FullName);
         }
 
         #endregion

@@ -24,6 +24,9 @@
                 Header="{Binding Source={StaticResource Strings}, Path=Open_File}"
                 Command="{Binding OpenFileCommand}" CommandParameter="{Binding}"/>
         </ContextMenu>
+        <TextBlock.InputBindings>
+            <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenFileCommand}" CommandParameter="{Binding}" />
+        </TextBlock.InputBindings>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>

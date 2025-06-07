@@ -46,7 +46,7 @@ namespace FileExplorer.ViewModels
                 foreach (var directoryName in Directory.GetFiles(path))
                 {
                     var fileInfo = new DirectoryInfo(directoryName);
-                    FileInfoViewModel itemViewModel = new();
+                    FileInfoViewModel itemViewModel = new(this);
                     itemViewModel.Model = fileInfo;
                     itemViewModel.SetIcon();
 

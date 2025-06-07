@@ -30,6 +30,7 @@ namespace FileExplorer
             _filesExplorer = new();
             DataContext = _filesExplorer;
             _filesExplorer.PropertyChanged += FilesExplorer_PropertyChanged;
+            _filesExplorer.OnOpenFileRequest += FilesExplorer_OnOpenFileRequest;
         }
 
         #endregion
@@ -47,6 +48,16 @@ namespace FileExplorer
             if (e.PropertyName == nameof(_filesExplorer.Lang))
                 CultureResources.ChangeCulture(CultureInfo.CurrentUICulture);
         }
+
+        private void FilesExplorer_OnOpenFileRequest(object sender, FileInfoViewModel viewModel)
+        {
+            var content = _filesExplorer.GetFileContent(viewModel);
+            if (content is string text)
+            {
+                FileContent.Text = text;
+            }
+        }
+
         private void DeleteItem_Click(object sender, RoutedEventArgs e)
         {
             if (DiskTreeView.SelectedItem is FileSystemInfoViewModel selectedItem)

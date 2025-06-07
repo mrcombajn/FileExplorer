@@ -1,10 +1,8 @@
 ﻿#region Using Statements
 
-#endregion
-
-using System.Windows;
-using System.Windows.Controls;
 using GalaSoft.MvvmLight.Command;
+
+#endregion
 
 namespace FileExplorer.ViewModels
 {
@@ -25,11 +23,11 @@ namespace FileExplorer.ViewModels
 
         #region Constructors and Deconstructors
 
-        public FileInfoViewModel()
-            : base()
+        public FileInfoViewModel(ViewModelBase owner)
+            : base(owner)
         {
-            OpenFileCommand = new RelayCommand(OpenFile, () => true);
-        } 
+            OpenFileCommand = new RelayCommand(() => OpenFileExecute(Caption), OpenFileCanExecute(Caption));
+        }
 
         #endregion
 
@@ -62,9 +60,13 @@ namespace FileExplorer.ViewModels
 
         #region Private Methods
 
-        private void OpenFile()
+        private bool OpenFileCanExecute(object parameter)
         {
-
+            return OwnerExplorer.OpenFileCommand.CanExecute(parameter);
+        }
+        private void OpenFileExecute(object parameter)
+        {
+            OwnerExplorer.OpenFileCommand.Execute(parameter);
         }
 
         #endregion
