@@ -4,6 +4,7 @@
 
 using System.Windows;
 using System.Windows.Controls;
+using GalaSoft.MvvmLight.Command;
 
 namespace FileExplorer.ViewModels
 {
@@ -19,6 +20,16 @@ namespace FileExplorer.ViewModels
         };
 
         private string _imageSource;
+
+        #endregion
+
+        #region Constructors and Deconstructors
+
+        public FileInfoViewModel()
+            : base()
+        {
+            OpenFileCommand = new RelayCommand(OpenFile, () => true);
+        } 
 
         #endregion
 
@@ -43,6 +54,17 @@ namespace FileExplorer.ViewModels
             {
                 _imageSource = "DefaultFile.png";
             }
+        }
+
+        public RelayCommand OpenFileCommand { get; set; }
+
+        #endregion
+
+        #region Private Methods
+
+        private void OpenFile()
+        {
+
         }
 
         #endregion

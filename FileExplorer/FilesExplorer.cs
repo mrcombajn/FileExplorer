@@ -20,8 +20,7 @@ namespace FileExplorer
             OpenRootFolderCommand = new RelayCommand(OpenRootFolderExecute);
             SortRootFolderCommand = new RelayCommand(
                 SortRootFolderExecute,
-                () => true);
-            //Root != null && Root.Items.Count > 0
+                () => Root != null && Root.Items.Count > 0);
         }
 
         #endregion

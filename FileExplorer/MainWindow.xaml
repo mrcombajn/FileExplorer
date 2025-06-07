@@ -19,6 +19,11 @@
             </Style.Triggers>
         </Style>
         <converters:LangBoolConverter x:Key="LangBoolConverter"/>
+        <ContextMenu x:Key="FileContextMenu">
+            <MenuItem x:Name="OpenFileMenuItem"
+                Header="{Binding Source={StaticResource Strings}, Path=Open_File}"
+                Command="{Binding OpenFileCommand}" CommandParameter="{Binding}"/>
+        </ContextMenu>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
