@@ -41,7 +41,7 @@ namespace FileExplorer.ViewModels
             }
             else
             {
-                _imageSource = "DefaultFile.png";
+                _imageSource = "/Images/DefaultFile.png";
             }
         }
 
