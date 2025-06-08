@@ -3,6 +3,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using FileExplorer.Collections;
 using static System.Windows.Forms.Design.AxImporter;
@@ -24,7 +25,7 @@ namespace FileExplorer.ViewModels
 
         public DirectoryInfoViewModel()
         {
-            Items.CollectionChanged += Items_CollectionChanged;    
+            Items.CollectionChanged += Items_CollectionChanged;
         }
 
         #endregion
@@ -86,8 +87,23 @@ namespace FileExplorer.ViewModels
             else
                 root.Items = new(root.Items.OrderByDescending(x => GetSortKey(x, sortOptions)));
 
-            foreach (var item in root.Items.OfType<DirectoryInfoViewModel>())
-                Sort(item, sortOptions);
+            List<DirectoryInfoViewModel> subDirectiories = root.Items.OfType<DirectoryInfoViewModel>().ToList();
+            if (subDirectiories.Count > 0)
+            {
+                Task[] taskArray = new Task[subDirectiories.Count];
+
+                for (int i = 0; i < subDirectiories.Count; i++)
+                {
+                    DirectoryInfoViewModel currentSubdir = subDirectiories[i]; // zamknięcie zmiennej
+
+                    taskArray[i] = Task.Factory.StartNew(() =>
+                    {
+                        Debug.WriteLine($"Sorting directory: {currentSubdir.Model.FullName}");
+                        Sort(currentSubdir, sortOptions);
+                    });
+                }
+                Task.WaitAll(taskArray);
+            }
 
             NotifyPropertyChanged(nameof(Items));
         }
@@ -102,7 +118,7 @@ namespace FileExplorer.ViewModels
 
             watcher.IncludeSubdirectories = false;
             watcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.DirectoryName | NotifyFilters.LastWrite;
-             
+
             watcher.Created += OnCreate;
             watcher.Renamed += OnRename;
             watcher.Deleted += OnDelete;
