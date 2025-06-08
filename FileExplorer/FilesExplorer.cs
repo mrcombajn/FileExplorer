@@ -1,5 +1,6 @@
 ﻿#region Using Statements
 
+using System.ComponentModel;
 using System.Globalization;
 using FileExplorer.Dialogs;
 using FileExplorer.ViewModels;
@@ -11,17 +12,21 @@ namespace FileExplorer
 {
     public class FilesExplorer : ViewModelBase
     {
+        #region Fields and Statements
+
+        private string _status;
+
+        #endregion
 
         #region Constructors and Deconstructors 
 
         public FilesExplorer()
         {
             NotifyPropertyChanged(nameof(Lang));
-            OpenRootFolderCommand = new RelayCommand(OpenRootFolderExecute);
+            OpenRootFolderCommand = new RelayCommand(OpenRootFolderExecuteAsync);
             SortRootFolderCommand = new RelayCommand(
                 SortRootFolderExecute,
-                () => true);
-            //Root != null && Root.Items.Count > 0
+                () => Root != null && Root?.Items?.Count > 0);
         }
 
         #endregion
@@ -49,6 +54,19 @@ namespace FileExplorer
         public RelayCommand OpenRootFolderCommand { get; private set; }
         public RelayCommand SortRootFolderCommand { get; private set; }
 
+        public string StatusMessage
+        {
+            get { return _status; }
+            set
+            {
+                if (value != null)
+                {
+                    _status = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
         #endregion
 
         #region Public Methods
@@ -57,6 +75,7 @@ namespace FileExplorer
         {
             Root = new DirectoryInfoViewModel();
             Root.Open(path);
+            Root.PropertyChanged += Root_PropertyChanged;
             NotifyPropertyChanged(nameof(Root));
         }
 
@@ -66,15 +85,19 @@ namespace FileExplorer
 
         #region Private Methods
 
-        private void OpenRootFolderExecute()
+        private async void OpenRootFolderExecuteAsync()
         {
             var dlg = new FolderBrowserDialog() { Description = Strings.SelectDirectory };
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                var path = dlg.SelectedPath;
-                OpenRoot(path);
+                await Task.Factory.StartNew(() =>
+                {
+                    var path = dlg.SelectedPath;
+                    OpenRoot(path);
+                });
             }
             NotifyPropertyChanged(nameof(Root));
+            StatusMessage = Strings.Message_Ready;
         }
 
         private void SortRootFolderExecute()
@@ -87,7 +110,15 @@ namespace FileExplorer
             }
         }
 
-        #endregion
+        private void Root_PropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            if (args.PropertyName == "StatusMessage" && sender is FileSystemInfoViewModel viewModel)
+            {
+                this.StatusMessage = viewModel.StatusMessage;
+            }
 
+        }
+
+        #endregion
     }
 }

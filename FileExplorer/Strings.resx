@@ -160,4 +160,7 @@
   <data name="Sort_Directory" xml:space="preserve">
     <value>Sort</value>
   </data>
+  <data name="Message_Ready" xml:space="preserve">
+    <value>Ready</value>
+  </data>
 </root>

@@ -133,6 +133,15 @@ namespace FileExplorer {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Ready.
+        /// </summary>
+        public static string Message_Ready {
+            get {
+                return ResourceManager.GetString("Message_Ready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Open directory.
         /// </summary>
         public static string Open_Directory {

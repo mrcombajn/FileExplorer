@@ -1,7 +1,10 @@
 ﻿#region Using Statements
 
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.IO;
+using FileExplorer.Collections;
 using static System.Windows.Forms.Design.AxImporter;
 
 #endregion
@@ -17,9 +20,18 @@ namespace FileExplorer.ViewModels
 
         #endregion
 
+        #region Constructors and Deconstructors
+
+        public DirectoryInfoViewModel()
+        {
+            Items.CollectionChanged += Items_CollectionChanged;    
+        }
+
+        #endregion
+
         #region Properties
 
-        public ObservableCollection<FileSystemInfoViewModel> Items { get; private set; } = new ObservableCollection<FileSystemInfoViewModel>();
+        public DispatchedObservableCollection<FileSystemInfoViewModel> Items { get; private set; } = new DispatchedObservableCollection<FileSystemInfoViewModel>();
 
         public Exception? Exception { get; private set; }
 
@@ -38,6 +50,7 @@ namespace FileExplorer.ViewModels
                     var dirInfo = new DirectoryInfo(directoryName);
                     DirectoryInfoViewModel itemViewModel = new();
                     itemViewModel.Model = dirInfo;
+                    itemViewModel.StatusMessage = dirInfo.Name;
                     Items.Add(itemViewModel);
 
                     itemViewModel.Open(dirInfo.FullName);
@@ -48,12 +61,14 @@ namespace FileExplorer.ViewModels
                     var fileInfo = new DirectoryInfo(directoryName);
                     FileInfoViewModel itemViewModel = new();
                     itemViewModel.Model = fileInfo;
+                    itemViewModel.StatusMessage = fileInfo.Name;
                     itemViewModel.SetIcon();
 
                     Items.Add(itemViewModel);
                 }
 
                 _fileSystemWatcher = CreateFileSystemWatcher(path);
+
             }
             catch (Exception ex)
             {
@@ -155,6 +170,31 @@ namespace FileExplorer.ViewModels
                 case SortBy.Modification: return item.LastWriteTime;
                 default: return item.Caption;
             }
+        }
+
+        private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            switch (args.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach (var item in args.NewItems.Cast<FileSystemInfoViewModel>())
+                    {
+                        item.PropertyChanged += Root_PropertyChanged;
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (var item in args.NewItems.Cast<FileSystemInfoViewModel>())
+                    {
+                        item.PropertyChanged -= Root_PropertyChanged;
+                    }
+                    break;
+            }
+        }
+
+        private void Root_PropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            if (args.PropertyName == "StatusMessage" && sender is FileSystemInfoViewModel viewModel)
+                this.StatusMessage = viewModel.StatusMessage;
         }
 
         #endregion
