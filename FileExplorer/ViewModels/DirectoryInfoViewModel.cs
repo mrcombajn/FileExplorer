@@ -80,7 +80,7 @@ namespace FileExplorer.ViewModels
 
         public void Sort(DirectoryInfoViewModel root, SortOptionsViewModel sortOptions)
         {
-            StatusMessage = root.Model.Name;
+            //StatusMessage = root.Model.Name;
 
             if (sortOptions.SortDirection == Enums.SortDirection.Ascending)
                 root.Items = new(root.Items.OrderBy(x => GetSortKey(x, sortOptions)));
@@ -100,7 +100,10 @@ namespace FileExplorer.ViewModels
                     {
                         Debug.WriteLine($"Sorting directory: {currentSubdir.Model.FullName}");
                         Sort(currentSubdir, sortOptions);
+                        StatusMessage = $"Sorting directory: {currentSubdir.Model.Name}";
+                        //Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
                     });
+
                 }
                 Task.WaitAll(taskArray);
             }
