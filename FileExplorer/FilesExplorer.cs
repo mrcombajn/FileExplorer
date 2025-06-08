@@ -3,6 +3,7 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
+using FileExplorer.Database;
 using FileExplorer.Dialogs;
 using FileExplorer.ViewModels;
 using GalaSoft.MvvmLight.Command;
@@ -27,8 +28,9 @@ namespace FileExplorer
             OpenRootFolderCommand = new RelayCommand(OpenRootFolderExecuteAsync);
             SortRootFolderCommand = new RelayCommand(
                 SortRootFolderExecute,
-                () => true);
-            //Root != null && Root?.Items?.Count > 0
+                CanSortFolderExecute);
+
+            var database = new FileExplorerContext();
         }
 
         #endregion
@@ -103,6 +105,8 @@ namespace FileExplorer
             NotifyPropertyChanged(nameof(Root));
             StatusMessage = Strings.Message_Ready;
         }
+
+        private bool CanSortFolderExecute() => Root != null && Root?.Items?.Count > 0;
 
         private async void SortRootFolderExecute()
         {
