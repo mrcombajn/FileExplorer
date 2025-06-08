@@ -79,6 +79,8 @@ namespace FileExplorer.ViewModels
 
         public void Sort(DirectoryInfoViewModel root, SortOptionsViewModel sortOptions)
         {
+            StatusMessage = root.Model.Name;
+
             if (sortOptions.SortDirection == Enums.SortDirection.Ascending)
                 root.Items = new(root.Items.OrderBy(x => GetSortKey(x, sortOptions)));
             else
