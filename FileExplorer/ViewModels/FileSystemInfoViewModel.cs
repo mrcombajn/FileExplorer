@@ -19,6 +19,8 @@ namespace FileExplorer.ViewModels
         private int? _data;
         private FileSystemInfo? _fileSystemInfo;
 
+        private string _status;
+
         #endregion
 
         #region Properties
@@ -104,6 +106,19 @@ namespace FileExplorer.ViewModels
                 if (_extension != value)
                 {
                     _extension = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public string StatusMessage
+        {
+            get { return _status; }
+            set
+            {
+                if (value != null)
+                {
+                    _status = value;
                     NotifyPropertyChanged();
                 }
             }
